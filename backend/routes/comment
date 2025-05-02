@@ -1,0 +1,10 @@
+const express = require('express');
+const { addComment, deleteComment } = require('../controllers/commentController');
+const authMiddleware = require('../middleware/authenticateJWT');
+const router = express.Router();
+
+// To protect comment routes with authentication middleware
+router.post('/', authMiddleware, addComment);
+router.delete('/:id', authMiddleware, deleteComment);
+
+module.exports = router;
