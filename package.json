@@ -1,7 +1,7 @@
 {
-    "name": "SecretNamespace",
+    "name": "Writer",
     "version": "1.0.0",
-    "description": "A CS Blogging Platform.",
+    "description": "A Blogging Platform.",
     "main": "server.js",
     "scripts": {
       "start": "node server.js"
