@@ -1,0 +1,19 @@
+const Comment = require('../models/Comment');
+
+exports.addComment = async (req, res) => {
+    const { post, content, parentComment } = req.body;
+    if (parentComment) {
+        const parent = await Comment.findById(parentComment);
+        if (!parent) return res.status(400).json({ message: 'Parent comment not found' });
+        const grandParent = parent.parentComment ? await Comment.findById(parent.parentComment) : null;
+        if (grandParent) return res.status(400).json({ message: 'Only 2 levels of comments allowed' });
+    }
+    const newComment = new Comment({ post, content, parentComment, author: req.user.id });
+    await newComment.save();
+    res.status(201).json(newComment);
+};
+
+exports.deleteComment = async (req, res) => {
+    await Comment.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Comment deleted' });
+};
