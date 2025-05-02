@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
+
 dotenv.config();
 const app = express();
 app.use(express.json());
